@@ -1,7 +1,7 @@
 # Fase di build del backend
 FROM eclipse-temurin:17-jdk-alpine AS build
 
-ARG CACHEBUST=1
+ARG CACHEBUST=2
 
 # Crea una directory di lavoro nel container
 WORKDIR /app
