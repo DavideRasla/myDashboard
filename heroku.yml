@@ -3,4 +3,4 @@ build:
     web: Dockerfile
 
 run:
-  web: java -jar target/photo-event-backend-0.0.1-SNAPSHOT.jar
+  web: java -jar /app/app.jar
