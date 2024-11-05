@@ -2,7 +2,5 @@ build:
   docker:
     web: Dockerfile
 
-release:
-  command:
-    - echo "Release step if needed"
-
+run:
+  web: java -jar target/photo-event-backend-0.0.1-SNAPSHOT.jar
