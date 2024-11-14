@@ -1,71 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Davide's Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
+    <!-- Header -->
     <header>
         <nav>
             <ul>
-                <li><a href="#bio">BIO</a></li>
+                <li><a href="#bio">Bio</a></li>
                 <li><a href="#photography">Photography</a></li>
-                <li><a href="#projects">Personal Projects</a></li>
+                <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <section id="bio" class="full-screen-section">
+    <!-- Full-Screen Bio Section -->
+    <section class="full-screen-section" id="bio">
         <div class="section-content">
+            <div class="bio-image">
+                <img src="your-photo.jpg" alt="Davide's Photo">
+            </div>
             <div class="bio-text">
                 <h1>Hi, I'm Davide</h1>
-                <p>Welcome to my world of technology, creativity, and adventure. Let me take you through my journey.</p>
-            </div>
-            <div class="bio-image">
-                <img src="your-image.jpg" alt="Davide's Photo">
+                <p>I'm a software engineer and photographer. I build amazing software and capture beautiful moments. Here, you'll find more about my work and my passion.</p>
             </div>
         </div>
     </section>
 
+    <!-- Photography Section -->
     <section id="photography" class="full-screen-section">
         <div class="section-content">
-            <h2>Photography</h2>
-            <p>Discover my passion for photography and the art behind my lens.</p>
+            <h2>Photography Gallery</h2>
+            <div class="photo-gallery">
+                <div class="photo-item" data-description="Description of the photo 1">
+                    <img src="image1.jpg" alt="Photo 1">
+                </div>
+                <div class="photo-item" data-description="Description of the photo 2">
+                    <img src="image2.jpg" alt="Photo 2">
+                </div>
+                <!-- Add more photos as needed -->
+            </div>
         </div>
     </section>
 
-    <section id="projects" class="full-screen-section">
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-image" id="lightboxImage" src="" alt="">
+        <div class="lightbox-description" id="lightboxDescription"></div>
+        <span class="lightbox-prev" onclick="changeImage(-1)">&lt;</span>
+        <span class="lightbox-next" onclick="changeImage(1)">&gt;</span>
+    </div>
+
+    <!-- Include external JS -->
+    <script src="gallery.js"></script>
+    
+    <!-- Projects Section -->
+    <section class="full-screen-section" id="projects">
         <div class="section-content">
-            <h2>Personal Projects</h2>
-            <p>Explore my technical and creative projects, each one an embodiment of my dedication and innovation.</p>
+            <h2>Projects</h2>
+            <p>Check out some of my latest projects:</p>
+            <div class="project-cards">
+                <div class="project-card">
+                    <img src="project1.jpg" alt="Project 1">
+                    <h3>Project 1</h3>
+                    <p>A brief description of Project 1.</p>
+                </div>
+                <div class="project-card">
+                    <img src="project2.jpg" alt="Project 2">
+                    <h3>Project 2</h3>
+                    <p>A brief description of Project 2.</p>
+                </div>
+                <div class="project-card">
+                    <img src="project3.jpg" alt="Project 3">
+                    <h3>Project 3</h3>
+                    <p>A brief description of Project 3.</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="contact" class="full-screen-section">
+    <!-- Contact Section -->
+    <section class="full-screen-section" id="contact">
         <div class="section-content">
-            <h2>Contact</h2>
-            <p>Let’s connect. Whether it’s for a collaboration or just a conversation, I’d love to hear from you.</p>
+            <h2>Contact Me</h2>
+            <p>Feel free to reach out for collaboration or inquiries!</p>
+            <a href="mailto:youremail@example.com" class="contact-btn">Contact Me</a>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Davide. All rights reserved.</p>
+        <p>© 2024 Davide's Portfolio. All rights reserved.</p>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollreveal/4.0.0/scrollreveal.min.js"></script>
-    <script>
-        ScrollReveal().reveal('.section-content', {
-            delay: 200,
-            distance: '50px',
-            origin: 'bottom',
-            opacity: 0,
-            duration: 1000,
-            interval: 200,
-        });
-    </script>
 </body>
+
 </html>
