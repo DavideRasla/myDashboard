@@ -7,38 +7,48 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
     <header>
         <nav>
             <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="#bio">BIO</a></li>
+                <li><a href="#photography">Photography</a></li>
+                <li><a href="#projects">Personal Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
-        <h1>Welcome to My Portfolio</h1>
-        <p>Your go-to source for all my projects and work.</p>
     </header>
 
-    <section id="home">
-        <h2>Featured Projects</h2>
-        <div class="project-card">
-            <h3>Project Title 1</h3>
-            <p>A brief description of the project goes here.</p>
-            <button id="fetchMessage">Fetch Message</button>
-            <p id="message"></p>
+    <section id="bio" class="full-screen-section">
+        <div class="section-content">
+            <div class="bio-text">
+                <h1>Hi, I'm Davide</h1>
+                <p>Welcome to my world of technology, creativity, and adventure. Let me take you through my journey.</p>
+            </div>
+            <div class="bio-image">
+                <img src="your-image.jpg" alt="Davide's Photo">
+            </div>
         </div>
-        <div class="project-card">
-            <h3>Project Title 2</h3>
-            <p>A brief description of the project goes here.</p>
-            <button id="fetchMessage2">Fetch Message</button>
-            <p id="message2"></p>
+    </section>
+
+    <section id="photography" class="full-screen-section">
+        <div class="section-content">
+            <h2>Photography</h2>
+            <p>Discover my passion for photography and the art behind my lens.</p>
         </div>
-        <div class="project-card">
-            <h3>Project Title 3</h3>
-            <p>A brief description of the project goes here.</p>
-            <button id="fetchMessage3">Fetch Message</button>
-            <p id="message3"></p>
+    </section>
+
+    <section id="projects" class="full-screen-section">
+        <div class="section-content">
+            <h2>Personal Projects</h2>
+            <p>Explore my technical and creative projects, each one an embodiment of my dedication and innovation.</p>
+        </div>
+    </section>
+
+    <section id="contact" class="full-screen-section">
+        <div class="section-content">
+            <h2>Contact</h2>
+            <p>Let’s connect. Whether it’s for a collaboration or just a conversation, I’d love to hear from you.</p>
         </div>
     </section>
 
@@ -46,31 +56,15 @@
         <p>&copy; 2024 Davide. All rights reserved.</p>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollreveal/4.0.0/scrollreveal.min.js"></script>
     <script>
-        document.getElementById('fetchMessage').addEventListener('click', () => {
-            fetch('/api')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('message').innerText = data;
-                })
-                .catch(error => console.error('Error fetching message:', error));
-        });
-
-        document.getElementById('fetchMessage2').addEventListener('click', () => {
-            fetch('/api')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('message2').innerText = data;
-                })
-                .catch(error => console.error('Error fetching message:', error));
-        });
-        document.getElementById('fetchMessage3').addEventListener('click', () => {
-            fetch('/api')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('message3').innerText = data;
-                })
-                .catch(error => console.error('Error fetching message:', error));
+        ScrollReveal().reveal('.section-content', {
+            delay: 200,
+            distance: '50px',
+            origin: 'bottom',
+            opacity: 0,
+            duration: 1000,
+            interval: 200,
         });
     </script>
 </body>

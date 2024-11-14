@@ -1,54 +1,106 @@
+/* Global Styles */
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    line-height: 1.6;
+    font-family: 'Helvetica Neue', sans-serif;
     background-color: #f4f4f4;
+    color: #333;
 }
 
 header {
-    background: #333;
-    color: #fff;
-    padding: 20px 0;
+    background: transparent;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 20px;
     text-align: center;
 }
 
 nav ul {
     padding: 0;
     list-style: none;
+    margin: 0;
+    display: flex;
+    justify-content: center;
 }
 
 nav ul li {
-    display: inline;
-    margin: 0 15px;
+    margin: 0 20px;
 }
 
 nav ul li a {
     color: #fff;
     text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 16px;
 }
 
-h1 {
-    margin: 10px 0;
+nav ul li a:hover {
+    color: #f4f4f4;
+    transition: color 0.3s ease;
 }
 
-h2 {
-    margin-top: 30px;
+/* Full-Screen Sections */
+.full-screen-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    transition: all 0.5s ease-in-out;
+}
+
+.full-screen-section:nth-child(even) {
+    background: #f4f4f4;
+    color: #333;
+}
+
+.section-content {
+    max-width: 800px;
+    padding: 20px;
     text-align: center;
 }
 
-.project-card {
-    background: #fff;
-    padding: 20px;
-    margin: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.bio-text h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 10px;
 }
 
-.project-card h3 {
-    margin: 0;
+.bio-text p {
+    font-size: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
+/* Image Styles */
+.bio-image img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.bio-image img:hover {
+    transform: scale(1.1);
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Footer */
 footer {
     background: #333;
     color: #fff;
