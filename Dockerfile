@@ -33,3 +33,4 @@ COPY backend/src/main/resources/static/ /app/src/main/resources/static/
 
 # Comando di avvio per eseguire il backend
 CMD ["java", "-jar", "/app/app.jar"]
+
