@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Build-Jdk-Spec: 22
-Implementation-Title: photo-event-backend
-Implementation-Version: 0.0.1-SNAPSHOT
-Main-Class: bl.Application
-Created-By: Maven Integration for Eclipse
-
