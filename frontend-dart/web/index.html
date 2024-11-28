@@ -3,14 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Dashboard</title>
-    <base href="/">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <title>Davide's Portfolio</title>
+    <link rel="stylesheet" href="/web/style.css">
 </head>
 <body>
-<app>Loading...</app> <!-- Questo è il punto in cui AngularDart inietterà il componente -->
+    <header>
+        <div class="logo">
+            <h1>Davide Raska</h1>
+            <p>Photographer & Computer Engineer</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" id="homeLink">Home</a></li>
+                <li><a href="#" id="aboutLink">About Me</a></li>
+                <li><a href="#" id="portfolioLink">Portfolio</a></li>
+                <li><a href="#" id="contactLink">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<!-- Qui viene incluso il file JavaScript generato dalla compilazione di Dart -->
-<script defer src="main.dart.js"></script>
+    <section id="home" class="section">
+        <h2>Welcome to My Portfolio</h2>
+        <p>Explore my work as a photographer and computer engineer.</p>
+        <button id="loadPortfolioButton">Load Portfolio</button>
+    </section>
+
+    <section id="about" class="section">
+        <h2>About Me</h2>
+        <p>My name is Davide Rasla, I am a passionate photographer and a computer engineer with over 10 years of experience. My love for photography blends with my passion for technology, creating creative and innovative solutions.</p>
+    </section>
+
+    <section id="portfolio" class="section">
+        <h2>Portfolio</h2>
+        <div id="gallery">
+            <!-- Image gallery here -->
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <h2>Contact</h2>
+        <p>If you're interested in working with me or have any questions, feel free to contact me.</p>
+        <form id="contactForm">
+            <input type="email" placeholder="Your email" id="email" required>
+            <textarea placeholder="Your message" id="message" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Davide Raska. All rights reserved.</p>
+    </footer>
+
+    <script src="/web/main.dart.js"></script> <!-- Dart link -->
+    <script src="/web/script.js"></script>
 </body>
 </html>
