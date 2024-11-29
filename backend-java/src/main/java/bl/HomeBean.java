@@ -1,8 +1,9 @@
-package bl; // Assicurati che il pacchetto sia corretto
+package bl; 
 
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,8 +16,9 @@ public class HomeBean {
     }
     
     @GetMapping("/api/java")
-    public String getRandomNumber() {
-
-        return "eccolooo";
+    public ResponseEntity<Map<String, String>> getRandomNumber() {
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Data from Java API!");
+        return ResponseEntity.ok(response);
     }
 }

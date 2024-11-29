@@ -5,12 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preload" href="style.css?v=1.0" as="style">
     <link rel="stylesheet" href="style.css?v=1.0">
-    <title>Test CSS</title>
+    <title>My Photography Portfolio</title>
 </head>
 <body>
-    <h1>CSS Test</h1>
     <header>
-        <h1>CSS Test2</h1>
-     </header>
+        <h1>Davide's Photography Portfolio</h1>
+    </header>
+    
+    <section class="projects">
+        <h2>Featured Projects</h2>
+        <div class="project-grid">
+            <!-- Dart will dynamically populate this -->
+        </div>
+    </section>
+
+    <section class="contact">
+        <h2>Contact Me</h2>
+        <form id="contact-form">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <div id="message-area"></div>
+    </section>
+
+    <section class="api-section">
+        <button id="fetch-data-btn">Fetch Data from Java API</button>
+        <div id="api-response"></div>
+    </section>
+    <script src="main.dart.js"></script>
 </body>
 </html>
