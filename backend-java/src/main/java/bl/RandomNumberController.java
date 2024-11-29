@@ -16,7 +16,7 @@ public class RandomNumberController {
 
     @GetMapping("/getRandomNumber")
     public Map<String, Object> getRandomNumber() {
-        int randomNumber = random.nextInt(100); // Restituisce un numero casuale tra 0 e 99
+        int randomNumber = random.nextInt(100); 
         Map<String, Object> response = new HashMap<>();
         response.put("number", randomNumber);
         response.put("message", "Ecco un numero casuale!");
