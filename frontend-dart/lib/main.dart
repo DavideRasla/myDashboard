@@ -56,7 +56,7 @@ void main() {
 
     // Send the form data to the Java backend (for demonstration purposes)
     var response = await HttpRequest.request(
-      'http://localhost:8080/api/java', // This is your Java backend
+      'http://localhost:8080/api/java/getTestString', // This is your Java backend
       method: 'POST',
       sendData: json.encode({
         'name': name,
@@ -75,6 +75,9 @@ void main() {
 
   // Handle API call when button is clicked
   var fetchButton = querySelector('#fetch-data-btn') as ButtonElement;
+  var fetchButton2 = querySelector('#fetch-data-btn2') as ButtonElement;
+  var apiResponseDiv2 = querySelector('#api-response2') as DivElement;
+
   var apiResponseDiv = querySelector('#api-response') as DivElement;
 
   fetchButton.onClick.listen((event) async {
@@ -82,7 +85,7 @@ void main() {
     window.console.error('Failed to fetch data from API: ');
 
     try {
-      var response = await HttpRequest.getString('http://localhost:8080/api/java');
+      var response = await HttpRequest.getString('http://localhost:8080/api/java/getTestString');
       var decodedResponse = jsonDecode(response);  // Decode JSON response
       apiResponseDiv.text = 'API Response: ${decodedResponse['message']}';
     } catch (e) {
@@ -90,4 +93,19 @@ void main() {
       window.console.error('Error: $e');
     }
   });
+
+  fetchButton2.onClick.listen((event) async {
+    print('Error sending form data');
+    window.console.error('Failed to fetch data from API: ');
+
+    try {
+      var response = await HttpRequest.getString('http://localhost:8080/api/java/getRandomNumber');
+      var decodedResponse = jsonDecode(response);  // Decode JSON response
+      apiResponseDiv2.text = 'API Response: ${decodedResponse['message']} : ${decodedResponse['number']}';
+    } catch (e) {
+      apiResponseDiv2.text = 'Failed to fetch data from API: $e';
+      window.console.error('Error: $e');
+    }
+  });
+
 }
