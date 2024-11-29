@@ -10,7 +10,7 @@ RUN mkdir -p /app/web /app/lib
 COPY web /app/web
 COPY lib /app/lib
 
-RUN dart compile js -o /app/web/main.dart.js lib/main.dart > /app/compile_output.log 2>&1
+RUN dart compile js --verbose -o /app/web/main.dart.js lib/main.dart > /app/compile_dart_output.log 2>&1
 
 FROM nginx:alpine
 

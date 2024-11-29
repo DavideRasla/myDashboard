@@ -24,7 +24,7 @@ services:
     ports:
       - "8082:80"
     volumes:
-        - ./frontend-dart:/app 
+        - ./frontend-dart:/app #ensures that the local app of dart build is avaiable when setting nginx
     networks:
       - app-network
 
