@@ -7,7 +7,6 @@ void main() {
 void loadPortfolio(Event e) {
   final gallery = querySelector('#gallery');
 
-  // Aggiungi alcune immagini alla galleria
   final images = [
     'https://via.placeholder.com/200',
     'https://via.placeholder.com/200',

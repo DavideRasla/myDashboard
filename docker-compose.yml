@@ -3,6 +3,7 @@ services:
   backend-java:
     build:
       context: ./backend-java
+    container_name: backendJavaContainer 
     ports:
       - "8080:8080"
     networks:
@@ -19,10 +20,11 @@ services:
   frontend-dart:
     build:
       context: ./frontend-dart
+    container_name: frontendDartContainer
     ports:
       - "8082:80"
     volumes:
-        - ./frontend-dart:/usr/share/nginx/html
+        - ./frontend-dart:/app 
     networks:
       - app-network
 

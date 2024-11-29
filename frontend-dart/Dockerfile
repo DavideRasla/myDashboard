@@ -2,20 +2,21 @@ FROM dart:stable AS build
 
 WORKDIR /app
 
-COPY pubspec.yaml .
-
+COPY pubspec.yaml . 
 RUN dart pub get
 
-COPY lib lib/
-COPY web web/
+RUN mkdir -p /app/web /app/lib
 
-RUN dart compile js -o build/web/main.dart.js lib/main.dart
+COPY web /app/web
+COPY lib /app/lib
+
+RUN dart compile js -o /app/web/main.dart.js lib/main.dart > /app/compile_output.log 2>&1
 
 FROM nginx:alpine
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
-COPY --from=build /app/build/web /usr/share/nginx/html
+COPY --from=build /app/ /usr/share/nginx/html
 
 EXPOSE 80
 
