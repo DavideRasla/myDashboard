@@ -3,39 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preload" href="style.css?v=1.0" as="style">
-    <link rel="stylesheet" href="style.css?v=1.0">
-    <title>My Photography Portfolio</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Davide's Photography</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- Header Section -->
     <header>
-        <h1>Davide's Photography Portfolio</h1>
+        <nav>
+            <ul>
+                <li><a href="#photography">Photography</a></li>
+                <li><a href="#contacts">Contacts</a></li>
+                <li><a href="#projects">Other Projects</a></li>
+            </ul>
+        </nav>
     </header>
-    
-    <section class="projects">
-        <h2>Featured Projects</h2>
-        <div class="project-grid">
-            <!-- Dart will dynamically populate this -->
-        </div>
+
+  <section id="photography">
+    <h2>Photography</h2>
+    <div class="gallery"></div>
+    <button id="prevButton">Previous</button>
+    <button id="nextButton">Next</button>
+  </section>
+
+    <!-- Contacts Section -->
+    <section id="contacts">
+        <h2>Contacts</h2>
+        <p>If you would like to get in touch, please reach out:</p>
+        <p>Email: <a href="mailto:your-email@example.com">your-email@example.com</a></p>
+        <p>Phone: +1234567890</p>
     </section>
 
-    <section class="contact">
-        <h2>Contact Me</h2>
-        <form id="contact-form">
-            <input type="text" id="name" placeholder="Your Name" required>
-            <input type="email" id="email" placeholder="Your Email" required>
-            <textarea id="message" placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-        <div id="message-area"></div>
+    <!-- Other Projects Section -->
+    <section id="projects">
+        <h2>Other Projects</h2>
+        <p>Here are some other projects I’ve worked on:</p>
+        <ul>
+            <li><a href="link-to-project1.com" target="_blank">Project 1</a></li>
+            <li><a href="link-to-project2.com" target="_blank">Project 2</a></li>
+            <!-- Add more projects as needed -->
+        </ul>
     </section>
+
 
     <section class="api-section">
         <button id="fetch-data-btn">Fetch Data from Java API</button>
-        <div id="api-response"></div>
+        <div id="api-responseJavaAPI1"></div>
         <button id="fetch-data-btn2">Fetch Data from Java API2</button>
-        <div id="api-response2"></div>
+        <div id="api-responseJavaAPI2"></div>
+        <button id="fetch-data-btn-go">Fetch Data from GO</button>
+        <div id="api-responseGo"></div>
     </section>
+
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Davide's Photography. All rights reserved.</p>
+    </footer>
     <script src="main.dart.js"></script>
+
 </body>
 </html>

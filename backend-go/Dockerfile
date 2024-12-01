@@ -1,17 +1,38 @@
-# Use Go as base image
-FROM golang:1.20-alpine
+# Build stage
+FROM golang:1.20 as builder
 
-# Set working directory
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy Go source files
+#we suppose 64bits arch
+ENV GOARCH=amd64 
+ENV GOOS=linux
+
+# Copy the source code to the container
 COPY . .
 
-# Build the application
-RUN go build -o app main.go
+# Initialize Go module (if go.mod doesn't exist)
+RUN if [ ! -f go.mod ]; then go mod init mymodule; fi
 
-# Expose port 8081
-EXPOSE 8081
+# Download dependencies (this will generate go.sum)
+RUN go mod tidy
 
-# Run the application
-ENTRYPOINT ["./app"]
+# Build the Go binary
+RUN go build -o backend-go .
+
+# Final stage
+FROM alpine:latest
+
+# Set the working directory for the final image
+WORKDIR /root/
+
+# Copy the binary from the builder image
+COPY --from=builder /app/backend-go .
+
+# Expose the application port (e.g., 8080)
+EXPOSE 8080
+
+RUN apk add --no-cache libc6-compat
+
+# Command to run the Go binary
+CMD ["./backend-go"]

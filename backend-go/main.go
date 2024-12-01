@@ -1,15 +1,22 @@
 package main
-
 import (
-	"fmt"
+	"log"
 	"net/http"
+	"os"
+
+	"backend-go/router"
 )
 
 func main() {
-	http.HandleFunc("/api", func(w http.ResponseWriter, r *http.Request) {
-		fmt.println(w, "Hello from Go backend!")
-	})
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
 
-	// Expose port 8081
-	http.ListenAndServe(":8081", nil)
+	r := router.SetupRouter()
+
+	log.Printf("Starting server on port %s", port)
+	if err := http.ListenAndServe(":"+port, r); err != nil {
+		log.Fatalf("Failed to start server: %v", err)
+	}
 }

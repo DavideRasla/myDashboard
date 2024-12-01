@@ -1,57 +1,182 @@
-body {
-    font-family: Arial, sans-serif;
+/* Basic Reset */
+* {
     margin: 0;
     padding: 0;
-    background: #f4f4f4;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
     color: #333;
 }
 
 header {
-    background: #333;
-    color: white;
+    background-color: #222;
     padding: 20px;
     text-align: center;
 }
 
-h1, h2 {
-    font-family: 'Arial', sans-serif;
+header nav ul {
+    list-style: none;
 }
 
-.projects {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+header nav ul li {
+    display: inline;
+    margin: 0 20px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Photography Section */
+#photography {
+    padding: 50px;
+    background-color: #fff;
+    text-align: center;
+}
+
+#photography h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Gallery Section */
+.gallery {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 20px;
     padding: 20px;
 }
 
-.project img {
-    width: 100%;
-    border-radius: 8px;
-}
-
-.contact, .api-section {
-    padding: 20px;
-    margin-top: 30px;
-    background: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-form input, form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-}
-
-form button {
-    padding: 10px 20px;
-    background: #333;
-    color: white;
-    border: none;
+.image-container {
+    position: relative;
+    width: 48%;  /* Make it take up 48% of the width to allow 2 images per row */
+    overflow: hidden;
+    border-radius: 8px; /* Rounded corners for a sleek look */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, border 0.3s ease;
     cursor: pointer;
+    background-color: #fff; /* Clean background for each image */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-button:disabled {
-    background: #ccc;
+/* Image styling */
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;  /* Ensure the entire image fits without cropping */
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect for image container */
+.image-container:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);  /* Stronger shadow */
+    transform: scale(1.05);  /* Slight zoom effect on hover */
+}
+
+
+/* Enlarge image dialog */
+.dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.dialog img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.dialog:after {
+  content: ' ';
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 30px;
+  height: 30px;
+  background: url('assets/icons/close-icon.png') no-repeat center center;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.dialog:after:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Contacts Section */
+#contacts {
+    padding: 50px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+#contacts h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+#contacts a {
+    color: #222;
+    text-decoration: none;
+}
+
+#contacts a:hover {
+    text-decoration: underline;
+}
+
+/* Other Projects Section */
+#projects {
+    padding: 50px;
+    background-color: #fff;
+    text-align: center;
+}
+
+#projects h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+#projects ul {
+    list-style: none;
+}
+
+#projects ul li {
+    margin-bottom: 10px;
+}
+
+#projects ul li a {
+    color: #222;
+    text-decoration: none;
+}
+
+#projects ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Footer Section */
+footer {
+    padding: 20px;
+    background-color: #222;
+    color: white;
+    text-align: center;
 }

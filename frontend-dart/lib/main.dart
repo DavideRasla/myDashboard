@@ -1,111 +1,79 @@
 import 'dart:html';
 import 'dart:convert';
 import 'dart:async';
+import 'gallery.dart';
 
 void main() {
-  // Projects data
-  List<Map<String, String>> projects = [
-    {
-      'image': 'assets/images/photo1.jpg',
-      'title': 'Project 1',
-      'description': 'Description of Project 1.'
-    },
-    {
-      'image': 'assets/images/photo2.jpg',
-      'title': 'Project 2',
-      'description': 'Description of Project 2.'
-    },
-    // Add more projects here
-  ];
-
-  // Populate projects dynamically
-  var projectSection = querySelector('.project-grid');
-  if (projectSection != null) {
-    projects.forEach((project) {
-      var projectDiv = DivElement()
-        ..classes.add('project')
-        ..appendHtml('''
-        <img src="${project['image']}" alt="${project['title']}">
-        <p>${project['description']}</p>
-      ''');
-      projectSection.append(projectDiv);
-    });
-  } else {
-    print('Error: projectSection not found!');
-  }
-
-  // Handle contact form submission
-  var form = querySelector('#contact-form') as FormElement;
-  var messageArea = querySelector('#message-area') as DivElement;
-
-  form.onSubmit.listen((event) async {
-    event.preventDefault();
-
-    var name = (querySelector('#name') as InputElement).value ?? '';
-    var email = (querySelector('#email') as InputElement).value ?? '';
-    var message = (querySelector('#message') as TextAreaElement).value ?? '';
-
-    if (name.isEmpty || email.isEmpty || message.isEmpty) {
-      messageArea.text = 'Please fill out all fields!';
-      messageArea.style.color = 'red';
-      return;
-    }
-
-    messageArea.text = 'Thank you for your message, $name!';
-    messageArea.style.color = 'green';
-
-    // Send the form data to the Java backend (for demonstration purposes)
-    var response = await HttpRequest.request(
-      'http://localhost:8080/api/java/getTestString', // This is your Java backend
-      method: 'POST',
-      sendData: json.encode({
-        'name': name,
-        'email': email,
-        'message': message,
-      }),
-      requestHeaders: {'Content-Type': 'application/json'},
-    );
-
-    if (response.status == 200) {
-      print('Form data sent successfully');
-    } else {
-      print('Error sending form data');
-    }
-  });
-
-  // Handle API call when button is clicked
+  // API fetch buttons and response divs
   var fetchButton = querySelector('#fetch-data-btn') as ButtonElement;
   var fetchButton2 = querySelector('#fetch-data-btn2') as ButtonElement;
-  var apiResponseDiv2 = querySelector('#api-response2') as DivElement;
+  var fetchButtonGo = querySelector('#fetch-data-btn-go') as ButtonElement;
 
-  var apiResponseDiv = querySelector('#api-response') as DivElement;
+  var responseJavaAPI2 = querySelector('#api-responseJavaAPI2') as DivElement;
+  var responseJavaAPI1 = querySelector('#api-responseJavaAPI1') as DivElement;
+  var responseGo = querySelector('#api-responseGo') as DivElement;
 
+  // Handle API fetch for Java API 1
   fetchButton.onClick.listen((event) async {
-    print('Error sending form data');
     window.console.error('Failed to fetch data from API: ');
-
     try {
       var response = await HttpRequest.getString('http://localhost:8080/api/java/getTestString');
-      var decodedResponse = jsonDecode(response);  // Decode JSON response
-      apiResponseDiv.text = 'API Response: ${decodedResponse['message']}';
+      var decodedResponse = jsonDecode(response); // Decode JSON response
+      responseJavaAPI1.text = 'API Response: ${decodedResponse['message']}';
     } catch (e) {
-      apiResponseDiv.text = 'Failed to fetch data from API: $e';
+      responseJavaAPI1.text = 'Failed to fetch data from API: $e';
       window.console.error('Error: $e');
     }
   });
 
+  // Handle API fetch for Java API 2
   fetchButton2.onClick.listen((event) async {
-    print('Error sending form data');
     window.console.error('Failed to fetch data from API: ');
-
     try {
       var response = await HttpRequest.getString('http://localhost:8080/api/java/getRandomNumber');
-      var decodedResponse = jsonDecode(response);  // Decode JSON response
-      apiResponseDiv2.text = 'API Response: ${decodedResponse['message']} : ${decodedResponse['number']}';
+      var decodedResponse = jsonDecode(response); // Decode JSON response
+      responseJavaAPI2.text = 'API Response: ${decodedResponse['message']} : ${decodedResponse['number']}';
     } catch (e) {
-      apiResponseDiv2.text = 'Failed to fetch data from API: $e';
+      responseJavaAPI2.text = 'Failed to fetch data from API: $e';
       window.console.error('Error: $e');
     }
   });
 
+  // Handle API fetch for Go API
+  fetchButtonGo.onClick.listen((event) async {
+    window.console.error('Failed to fetch data from API: ');
+    try {
+      var response = await HttpRequest.getString('http://localhost:8081/api/go/getHeadOrTails');
+      var decodedResponse = jsonDecode(response); // Decode JSON response
+      responseGo.text = 'API Response: ${decodedResponse['result']}';
+    } catch (e) {
+      responseGo.text = 'Failed to fetch data from API: $e';
+      window.console.error('Error: $e');
+    }
+  });
+
+  // List of images for gallery
+  List<String> images = [
+    'assets/images/1.jpg',
+    'assets/images/2.jpg',
+    'assets/images/3.jpg',
+    'assets/images/4.jpg',
+    'assets/images/5.jpg',
+    'assets/images/6.jpg',
+    'assets/images/7.jpg',
+    'assets/images/8.jpg',
+  ];
+
+  // Get the gallery container and navigation buttons
+  final galleryContainer = querySelector('#photography .gallery') as DivElement;
+  final prevButton = querySelector('#prevButton') as ButtonElement;
+  final nextButton = querySelector('#nextButton') as ButtonElement;
+
+  // Initialize gallery
+  Gallery(
+    galleryContainer: galleryContainer,
+    prevButton: prevButton,
+    nextButton: nextButton,
+    images: images,
+  );
 }
