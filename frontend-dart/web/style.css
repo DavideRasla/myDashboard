@@ -62,7 +62,6 @@ header nav ul li a:hover {
     width: 48%;  /* Make it take up 48% of the width to allow 2 images per row */
     overflow: hidden;
     border-radius: 8px; /* Rounded corners for a sleek look */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease, border 0.3s ease;
     cursor: pointer;
     background-color: #fff; /* Clean background for each image */

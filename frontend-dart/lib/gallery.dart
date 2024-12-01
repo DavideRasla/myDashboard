@@ -5,6 +5,8 @@ class Gallery {
   final List<String> images;
   int currentIndex = 0;
 
+
+
   final DivElement galleryContainer;
   final ButtonElement prevButton;
   final ButtonElement nextButton;
@@ -26,8 +28,8 @@ class Gallery {
   }
 
 void _createImageElements() {
-  galleryContainer.innerHtml = ''; // Clear existing elements
-  
+
+  List<DivElement> containers = [];
   for (int i = 0; i < 2; i++) {
     final imageIndex = (currentIndex + i) % images.length;
     
@@ -68,10 +70,14 @@ void _createImageElements() {
 
     // Append the image element to the container
     imageContainer.append(img);
-    
+    containers.add(imageContainer);
     // Add the image container to the gallery
-    galleryContainer.append(imageContainer);
   }
+  galleryContainer.innerHtml = ''; // Clear existing elements
+  galleryContainer.append(containers[0]);
+  galleryContainer.append(containers[1]);
+
+
 }
 
 
