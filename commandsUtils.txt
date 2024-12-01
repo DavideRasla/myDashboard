@@ -1,0 +1,39 @@
+eliminare tutte le immagini :
+    docker rmi -f $(docker images -aq)
+
+lanciare docker 
+    docker build --no-cache -t backend-java .
+
+    docker run -p 8080:8080 backend-java
+
+
+far partire intelliJ
+    sh ./idea.sh &
+
+
+docker compose
+    docker-compose down
+    docker-compose build --no-cache frontend-dart
+
+
+--------------
+
+Comparison of Java and Go
++--------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+
+| Aspect                         | Java (with Objects)                                       | Go (with Pointers)                                         |
++--------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+
+| How Objects Are Passed         | The reference to the object is passed by value.           | The pointer to the object can be passed explicitly.        |
++--------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+
+| Can You Modify the Object?     | Yes, because both methods are referencing the same object.| Yes, if a pointer is passed.                              |
++--------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+
+| Can You Change the Reference?  | No, you cannot change where the reference points to inside the method. | Yes, if a pointer is passed.                              |
++--------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+
+| Example of Modifying the Object| Yes, any modification to fields of the object is reflected outside the method. | Yes, modification works with the original object via pointer. |
++--------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+
+| Effect of Reassigning          | Reassigning a reference inside the method does not affect the original reference outside. | Reassigning a pointer will affect the original object if passed by pointer. |
++--------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+
+
+
+Summary of Differences:
+Java: Passes the value of the reference (memory address) to methods, meaning the object itself can be modified, but the reference itself cannot be reassigned.
+Go: Uses explicit pointers, which allows you to control whether you're modifying the original object (via a pointer) or working with a copy of the value. This makes Go's behavior more flexible and explicit compared to Java's automatic reference handling.
