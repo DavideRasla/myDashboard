@@ -24,32 +24,56 @@ class Gallery {
     _setupNavigationButtons();
     _startAutoSlide();
   }
-// Create image elements and append to the gallery container
+
 void _createImageElements() {
   galleryContainer.innerHtml = ''; // Clear existing elements
+  
   for (int i = 0; i < 2; i++) {
     final imageIndex = (currentIndex + i) % images.length;
     
-    // Create a new image element
-    final imageElement = DivElement()
-      ..className = 'photo'
-      ..id = 'photo-${imageIndex + 1}';
+    // Create a new image container
+    final imageContainer = DivElement()
+      ..className = 'image-container'
+      ..id = 'photo-${imageIndex + 1}'
+      ..style.objectFit = 'contain'
+      ..style.display = 'flex'
+      ..style.alignItems = 'center'
+      ..style.justifyContent = 'center'
+      ..style.maxWidth = '800px' // Maximum width limit
+      ..style.maxHeight = '600px' // Maximum height limit
+      ..style.width = '100%' // Allow flexible scaling
+      ..style.height = 'auto'; // Maintain aspect ratio;
     
+    // Create an image element
     final img = ImageElement(src: images[imageIndex])
-      ..alt = 'Photo ${imageIndex + 1}' // Set the alt property separately
-      ..style.width = '600px'
-      ..style.height = '500px';
+      ..alt = 'Photo ${imageIndex + 1}' // Alt property for accessibility
+      ..style.objectFit = 'contain'; // Ensure the entire image is shown without cropping;
+
+    
+    // Add hover effects and smooth transitions
+    imageContainer.onMouseOver.listen((event) {
+      imageContainer.style.border = '2px solid rgba(255, 255, 255, 0.8)';
+      imageContainer.style.transform = 'scale(1.05)';
+    });
+
+    imageContainer.onMouseOut.listen((event) {
+      imageContainer.style.border = '';
+      imageContainer.style.transform = 'scale(1)';
+    });
     
     // Add an event listener to enlarge image on click
     img.onClick.listen((event) {
       _enlargeImage(images[imageIndex]);
     });
+
+    // Append the image element to the container
+    imageContainer.append(img);
     
-    // Append the image element to the div
-    imageElement.append(img);
-    galleryContainer.append(imageElement);
+    // Add the image container to the gallery
+    galleryContainer.append(imageContainer);
   }
 }
+
 
 // Enlarge image in a dialog when clicked
 void _enlargeImage(String imagePath) {
