@@ -20,12 +20,22 @@
         </nav>
     </header>
 
-  <section id="photography">
-    <h2>Photography</h2>
-    <div class="gallery"></div>
-    <button id="prevButton">Previous</button>
-    <button id="nextButton">Next</button>
-  </section>
+    <section id="photography">
+      <h2>Photo raphy</h2>
+      <div class="photo-container">
+        <div class="gallery"></div>
+        <div class="navigation-buttons">
+          <button id="prevButton" class="nav-button" aria-label="Previous Image">Previous</button>
+          <button id="nextButton" class="nav-button" aria-label="Next Image">Next</button>
+        </div>
+      </div>
+
+      <!-- Modal for larger images -->
+      <div id="imageModal" class="modal">
+        <span id="closeModal" class="close-btn">&times;</span>
+        <img id="modalImage" class="modal-content" />
+      </div>
+    </section>
 
     <!-- Contacts Section -->
     <section id="contacts">

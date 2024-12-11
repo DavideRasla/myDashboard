@@ -1,86 +1,156 @@
 /* Basic Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
 }
 
 header {
-    background-color: #222;
-    padding: 20px;
-    text-align: center;
+  background-color: #222;
+  padding: 20px;
+  text-align: center;
 }
 
 header nav ul {
-    list-style: none;
+  list-style: none;
 }
 
 header nav ul li {
-    display: inline;
-    margin: 0 20px;
+  display: inline;
+  margin: 0 20px;
 }
 
 header nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 header nav ul li a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 /* Photography Section */
-#photography {
-    padding: 50px;
-    background-color: #fff;
-    text-align: center;
+
+.photo-container {
+  width: 80%; /* Adjust width based on your design */
+  max-width: 1200px; /* Optional: limit the maximum size */
+  height: 600px; /* Fixed height for the gallery container */
+  margin: 0 auto; /* Centering the container horizontally */
+  overflow: hidden; /* Ensures content doesn't overflow outside */
+  position: relative; /* To ensure proper positioning of inner elements */
 }
 
-#photography h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
+/* Fixed size container around the gallery */
+/* Modal styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-/* Gallery Section */
+.modal-content {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 2rem;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1050;
+}
+
+.close-btn:hover {
+  color: #ffeb3b;
+}
+
+/* Gallery and image container styles (no changes here from before) */
+.photo-container {
+  width: 80%;
+  max-width: 1200px;
+  height: 600px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+
 .gallery {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: 80%;
 }
 
 .image-container {
-    position: relative;
-    width: 48%;  /* Make it take up 48% of the width to allow 2 images per row */
-    overflow: hidden;
-    border-radius: 8px; /* Rounded corners for a sleek look */
-    transition: transform 0.3s ease, border 0.3s ease;
-    cursor: pointer;
-    background-color: #fff; /* Clean background for each image */
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  position: relative;
+  width: 48%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
 }
 
-/* Image styling */
 .image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;  /* Ensure the entire image fits without cropping */
-    border-radius: 8px;
-    transition: transform 0.3s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
 }
 
-/* Hover effect for image container */
 .image-container:hover {
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);  /* Stronger shadow */
-    transform: scale(1.05);  /* Slight zoom effect on hover */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.nav-button {
+  padding: 15px 30px;
+  background-color: #000000;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: #000003;
+  transform: scale(1.05);
+}
+
+.nav-button:focus {
+  outline: 3px solid #ffeb3b;
 }
 
 
@@ -121,61 +191,8 @@ header nav ul li a:hover {
 .dialog:after:hover {
   background-color: rgba(255, 255, 255, 0.8);
 }
-
-/* Contacts Section */
-#contacts {
-    padding: 50px;
-    background-color: #f9f9f9;
-    text-align: center;
-}
-
-#contacts h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
-#contacts a {
-    color: #222;
-    text-decoration: none;
-}
-
-#contacts a:hover {
-    text-decoration: underline;
-}
-
-/* Other Projects Section */
-#projects {
-    padding: 50px;
-    background-color: #fff;
-    text-align: center;
-}
-
-#projects h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
-#projects ul {
-    list-style: none;
-}
-
-#projects ul li {
-    margin-bottom: 10px;
-}
-
-#projects ul li a {
-    color: #222;
-    text-decoration: none;
-}
-
-#projects ul li a:hover {
-    text-decoration: underline;
-}
-
-/* Footer Section */
-footer {
-    padding: 20px;
-    background-color: #222;
-    color: white;
-    text-align: center;
+#imageModal {
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
 }

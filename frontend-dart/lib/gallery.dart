@@ -5,8 +5,6 @@ class Gallery {
   final List<String> images;
   int currentIndex = 0;
 
-
-
   final DivElement galleryContainer;
   final ButtonElement prevButton;
   final ButtonElement nextButton;
@@ -25,88 +23,47 @@ class Gallery {
     _createImageElements();
     _setupNavigationButtons();
     _startAutoSlide();
+    _setupImageModal();
   }
 
-void _createImageElements() {
+  // Create image elements and update the gallery
+  void _createImageElements() {
+    List<DivElement> containers = [];
+    for (int i = 0; i < 2; i++) {
+      final imageIndex = (currentIndex + i) % images.length;
+      final imageContainer = DivElement()
+        ..className = 'image-container'
+        ..id = 'photo-${imageIndex + 1}';
 
-  List<DivElement> containers = [];
-  for (int i = 0; i < 2; i++) {
-    final imageIndex = (currentIndex + i) % images.length;
-    
-    // Create a new image container
-    final imageContainer = DivElement()
-      ..className = 'image-container'
-      ..id = 'photo-${imageIndex + 1}'
-      ..style.objectFit = 'contain'
-      ..style.display = 'flex'
-      ..style.alignItems = 'center'
-      ..style.justifyContent = 'center'
-      ..style.maxWidth = '800px' // Maximum width limit
-      ..style.maxHeight = '600px' // Maximum height limit
-      ..style.width = '100%' // Allow flexible scaling
-      ..style.height = 'auto'; // Maintain aspect ratio;
-    
-    // Create an image element
-    final img = ImageElement(src: images[imageIndex])
-      ..alt = 'Photo ${imageIndex + 1}' // Alt property for accessibility
-      ..style.objectFit = 'contain'; // Ensure the entire image is shown without cropping;
+      final img = ImageElement(src: images[imageIndex])
+        ..alt = 'Photo ${imageIndex + 1}'
+        ..style.objectFit = 'cover'
+        ..style.width = '100%' // Ensures the images fit inside their containers
+        ..style.height = 'auto'; // Keeps aspect ratio
 
-    
-    // Add hover effects and smooth transitions
-    imageContainer.onMouseOver.listen((event) {
-      imageContainer.style.border = '2px solid rgba(255, 255, 255, 0.8)';
-      imageContainer.style.transform = 'scale(1.05)';
-    });
+      img.onClick.listen((e) => _openImageModal(images[imageIndex]));
 
-    imageContainer.onMouseOut.listen((event) {
-      imageContainer.style.border = '';
-      imageContainer.style.transform = 'scale(1)';
-    });
-    
-    // Add an event listener to enlarge image on click
-    img.onClick.listen((event) {
-      _enlargeImage(images[imageIndex]);
-    });
-
-    // Append the image element to the container
-    imageContainer.append(img);
-    containers.add(imageContainer);
-    // Add the image container to the gallery
-  }
-  galleryContainer.innerHtml = ''; // Clear existing elements
-  galleryContainer.append(containers[0]);
-  galleryContainer.append(containers[1]);
-
-
-}
-
-
-// Enlarge image in a dialog when clicked
-void _enlargeImage(String imagePath) {
-  final dialog = DivElement()
-    ..className = 'dialog';
-  
-  // Create and add the image to the dialog
-  final enlargedImage = ImageElement(src: imagePath);
-  dialog.append(enlargedImage);
-  
-  // Append the dialog to the body
-  document.body?.append(dialog);
-  
-  // Add an event listener to remove the dialog if clicked outside of the image
-  dialog.onClick.listen((e) {
-    if (e.target == dialog) {
-      dialog.remove();
+      // Add the image element to the container
+      imageContainer.append(img);
+      containers.add(imageContainer);
     }
-  });
-}
 
+    // Update the gallery without clearing its contents, only replace the images
+    if (galleryContainer.children.isNotEmpty) {
+      galleryContainer.children[0].replaceWith(containers[0]);
+      galleryContainer.children[1].replaceWith(containers[1]);
+    } else {
+      galleryContainer.append(containers[0]);
+      galleryContainer.append(containers[1]);
+    }
+  }
 
   // Show next image pair
   void showNext() {
-    currentIndex = (currentIndex + 2) % images.length;
+    currentIndex = currentIndex;
     _createImageElements();
   }
+
 
   // Show previous image pair
   void showPrev() {
@@ -120,10 +77,81 @@ void _enlargeImage(String imagePath) {
     nextButton.onClick.listen((event) => showNext());
   }
 
-  // Auto slide images every 3 seconds
+  // Auto slide images every 10 seconds
   void _startAutoSlide() {
     Timer.periodic(Duration(seconds: 10), (timer) {
       showNext();
     });
   }
+
+  // Modal functionality
+  void _setupImageModal() {
+    // Modal elements
+    DivElement modal = DivElement()
+      ..id = 'imageModal'
+      ..style.display = 'none'
+      ..style.position = 'fixed'
+      ..style.top = '0'
+      ..style.left = '0'
+      ..style.width = '100%'
+      ..style.height = '100%'
+      ..style.backgroundColor = 'rgba(0, 0, 0, 0.7)'
+      ..style.justifyContent = 'center'
+      ..style.alignItems = 'center'
+      ..style.display = 'none';
+      
+    ImageElement modalImage = ImageElement()
+      ..id = 'modalImage'
+      ..style.maxWidth = '90%'
+      ..style.maxHeight = '90%'
+      ..style.objectFit = 'contain';
+
+    ButtonElement closeBtn = ButtonElement()
+      ..text = 'Close'
+      ..style.position = 'absolute'
+      ..style.top = '10px'
+      ..style.right = '20px'
+      ..style.fontSize = '20px'
+      ..style.color = 'white'
+      ..style.backgroundColor = 'transparent'
+      ..style.border = 'none';
+
+    // Add the modal and the image
+    modal.append(modalImage);
+    modal.append(closeBtn);
+    document.body?.append(modal);
+
+    // Close modal when clicking the close button or outside the image
+    closeBtn.onClick.listen((e) => _closeImageModal(modal));
+    modal.onClick.listen((e) {
+      if (e.target == modal) {
+        _closeImageModal(modal);
+      }
+    });
+
+    // Close modal when pressing the 'Esc' key
+    window.onKeyUp.listen((e) {
+      if (e.key == 'Escape') {
+        _closeImageModal(modal);
+      }
+    });
+  }
+
+  // Open the image in the modal
+  void _openImageModal(String imageUrl) {
+    DivElement modal = querySelector('#imageModal') as DivElement;
+    ImageElement modalImage = querySelector('#modalImage') as ImageElement;
+    modalImage.src = imageUrl;
+    modal.style.display = 'flex';
+  }
+
+void _closeImageModal(DivElement modal) {
+  modal.style.opacity = '0';
+  modal.style.visibility = 'hidden';
+  // Delay hiding the modal to allow for the fade effect
+  Future.delayed(Duration(milliseconds: 300), () {
+    modal.style.display = 'none';
+  });
+}
+
 }
