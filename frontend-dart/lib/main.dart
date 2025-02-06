@@ -17,7 +17,7 @@ void main() {
   fetchButton.onClick.listen((event) async {
     window.console.error('Failed to fetch data from API: ');
     try {
-      var response = await HttpRequest.getString('http://localhost:8080/api/java/getTestString');
+      var response = await HttpRequest.getString('http://[2a02:aa16:397d:ea00:7499:2b0d:a4a3:314c]:8080/api/java/getTestString');
       var decodedResponse = jsonDecode(response); // Decode JSON response
       responseJavaAPI1.text = 'API Response: ${decodedResponse['message']}';
     } catch (e) {
@@ -30,7 +30,7 @@ void main() {
   fetchButton2.onClick.listen((event) async {
     window.console.error('Failed to fetch data from API: ');
     try {
-      var response = await HttpRequest.getString('http://localhost:8080/api/java/getRandomNumber');
+      var response = await HttpRequest.getString('http://[2a02:aa16:397d:ea00:7499:2b0d:a4a3:314c]:8080/api/java/getRandomNumber');
       var decodedResponse = jsonDecode(response); // Decode JSON response
       responseJavaAPI2.text = 'API Response: ${decodedResponse['message']} : ${decodedResponse['number']}';
     } catch (e) {
@@ -39,18 +39,19 @@ void main() {
     }
   });
 
-  // Handle API fetch for Go API
-  fetchButtonGo.onClick.listen((event) async {
-    window.console.error('Failed to fetch data from API: ');
-    try {
-      var response = await HttpRequest.getString('http://localhost:8081/api/go/getHeadOrTails');
-      var decodedResponse = jsonDecode(response); // Decode JSON response
-      responseGo.text = 'API Response: ${decodedResponse['result']}';
-    } catch (e) {
-      responseGo.text = 'Failed to fetch data from API: $e';
-      window.console.error('Error: $e');
-    }
-  });
+// Handle API fetch for Go API
+fetchButtonGo.onClick.listen((event) async {
+  window.console.error('Failed to fetch data from API: ');
+  try {
+    var response = await HttpRequest.getString('http://[2a02:aa16:397d:ea00:7499:2b0d:a4a3:314c]:8081/api/go/getHeadOrTails');
+    var decodedResponse = jsonDecode(response); // Decode JSON response
+    responseGo.text = 'API Response: ${decodedResponse['result']}';
+  } catch (e) {
+    responseGo.text = 'Failed to fetch data from API: $e';
+    window.console.error('Error: $e');
+  }
+});
+
 
   // List of images for gallery
   List<String> images = [

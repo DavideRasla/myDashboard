@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+
 type HomeApiResponse struct {
 	Message string `json:"message"`
 }
@@ -36,9 +37,8 @@ func GetHeadOrTails(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Set content-type as JSON and write response
-	w.Header().Set("Content-Type", "application/json")
-	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:8082") //to avoid CORS (Cross-Origin Resource Sharing) error on browsers
-    w.Header().Set("Access-Control-Allow-Methods", "GET")
-    w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	w.Header().Set("Access-Control-Allow-Origin", "*")  // Permette tutte le origini
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")  // Permette metodi GET, POST e OPTIONS
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")  // Permette l'intestazione Content-Type
 	json.NewEncoder(w).Encode(response)
 }
