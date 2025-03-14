@@ -13,7 +13,7 @@ void main() {
   var responseJavaAPI1 = querySelector('#api-responseJavaAPI1') as DivElement;
   var responseGo = querySelector('#api-responseGo') as DivElement;
 
-  // Handle API fetch for Java API 1
+  // Handle API fetch forsudo apt-get update && sudo apt-get install dart Java API 1
   fetchButton.onClick.listen((event) async {
     window.console.error('Failed to fetch data from API: ');
     try {
